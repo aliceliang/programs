@@ -50,7 +50,8 @@ class TicTacToe:
                 self.board[choice - 1] = icon
             else:
                 print()
-                print("That space is already taken!")
+                print("That space is already taken! Go again.")
+                self.player_move(icon)
         else:
             print("Computer's turn")
             # Check if the computer can win in the next move
@@ -75,23 +76,27 @@ class TicTacToe:
                     self.board[choice] = icon
                     return
 
+    def play_game(self):
+        while True:
+            self.print_board()
+            self.player_move('X')
+            self.print_board()
+            if self.check_win('X'):
+                print("X wins! Congratulations!")
+                break
+            elif self.is_draw():
+                print("It's a draw!")
+                break
+            self.player_move('O')
+            if self.check_win('O'):
+                self.print_board()
+                print("O wins! Congratulations!")
+                break
+            elif self.is_draw():
+                print("It's a draw!")
+                break
+
+
 if __name__ == "__main__":
     game = TicTacToe()
-    while True:
-        game.print_board()
-        game.player_move('X')
-        game.print_board()
-        if game.check_win('X'):
-            print("X wins! Congratulations!")
-            break
-        elif game.is_draw():
-            print("It's a draw!")
-            break
-        game.player_move('O')
-        if game.check_win('O'):
-            game.print_board()
-            print("O wins! Congratulations!")
-            break
-        elif game.is_draw():
-            print("It's a draw!")
-            break
+    game.play_game()
