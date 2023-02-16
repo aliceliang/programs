@@ -39,7 +39,6 @@ class TicTacToe:
             return False
 
     def player_move(self, icon):
-        print(self.board)
         if icon == self.player1_icon:
             number = 1
         elif icon == self.player2_icon:
@@ -49,7 +48,6 @@ class TicTacToe:
             choice = int(input("Enter your move (1-9): ").strip())
             if self.board[choice - 1] == ' ':
                 self.board[choice - 1] = icon
-                print(self.board)
             else:
                 print()
                 print("That space is already taken!")
@@ -59,8 +57,6 @@ class TicTacToe:
             for i in range(0, 9):
                 if self.board[i] == ' ':
                     self.board[i] = icon
-                    print('check computer win')
-                    print(self.board)
                     if self.check_win(icon):
                         return
                     self.board[i] = ' '
@@ -68,8 +64,6 @@ class TicTacToe:
             for i in range(0, 9):
                 if self.board[i] == ' ':
                     self.board[i] = self.player1_icon
-                    print('check player win')
-                    print(self.board)
                     if self.check_win(self.player1_icon):
                         self.board[i] = icon
                         return
@@ -79,8 +73,6 @@ class TicTacToe:
                 choice = random.randint(0, 8)
                 if self.board[choice] == ' ':
                     self.board[choice] = icon
-                    print('random move %d', choice)
-                    print(self.board)
                     return
 
 if __name__ == "__main__":
