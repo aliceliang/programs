@@ -79,10 +79,11 @@ class AccountStore(object):
         id = self.id_counter
         account = Account(id)
         self.store[id] = account
+        self.id_counter += 1
         return account
     
     def merge_accounts(self, account_1, account_2):
-        new_account = Account()
+        new_account = self.create_account()
         account_1.merge_account(new_account)
         account_2.merge_account(new_account)
         return new_account
@@ -125,14 +126,12 @@ class Bank(object):
     
     def top_k_accounts(self, k):
         """
-        Return the top k accounts with outgoing money
-        outgoing money = transfer
-        incoming money = deposit
-        select from the transaction store where 
+        Return the top k accounts with outgoing money, aka last account balance
         """
+        # get all accounts
         accounts = self.account_store.store
-        # sort by accounts with greatest balance
-        sorted_accounts_desc = sorted(accounts.items(), key=lambda kv: kv[1].balance, reverse=True)
+        # sort by accounts with least balance
+        sorted_accounts_desc = sorted(accounts.items(), key=lambda kv: kv[1].balance)
         
         return sorted_accounts_desc[:k]
     
