@@ -38,6 +38,29 @@ class TicTacToe:
         else:
             return False
 
+    def basic_computer_move(self):
+        # Check if the computer can win in the next move
+        for i in range(0, 9):
+                if self.board[i] == ' ':
+                    self.board[i] = icon
+                    if self.check_win(icon):
+                        return
+                    self.board[i] = ' '
+        # Check if the player can win in the next move and block them
+        for i in range(0, 9):
+            if self.board[i] == ' ':
+                self.board[i] = self.player1_icon
+                if self.check_win(self.player1_icon):
+                    self.board[i] = icon
+                    return
+                self.board[i] = ' '
+        # Otherwise, make a random move
+        while True:
+            choice = random.randint(0, 8)
+            if self.board[choice] == ' ':
+                self.board[choice] = icon
+                return
+
     def player_move(self, icon):
         if icon == self.player1_icon:
             number = 1
@@ -54,27 +77,8 @@ class TicTacToe:
                 self.player_move(icon)
         else:
             print("Computer's turn")
-            # Check if the computer can win in the next move
-            for i in range(0, 9):
-                if self.board[i] == ' ':
-                    self.board[i] = icon
-                    if self.check_win(icon):
-                        return
-                    self.board[i] = ' '
-            # Check if the player can win in the next move and block them
-            for i in range(0, 9):
-                if self.board[i] == ' ':
-                    self.board[i] = self.player1_icon
-                    if self.check_win(self.player1_icon):
-                        self.board[i] = icon
-                        return
-                    self.board[i] = ' '
-            # Otherwise, make a random move
-            while True:
-                choice = random.randint(0, 8)
-                if self.board[choice] == ' ':
-                    self.board[choice] = icon
-                    return
+            basic_computer_move()
+            
 
     def play_game(self):
         while True:
