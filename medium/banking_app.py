@@ -121,10 +121,10 @@ class Bank(object):
         account.record_transaction(transaction)
         return transaction
     
-    def hold_transaction(self, transaction_id):
+    def get_transaction(self, transaction_id):
         return self.transaction_store.get_transaction(transaction_id)
     
-    def top_k_accounts(self, k):
+    def top_k_accounts_outgoing(self, k):
         """
         Return the top k accounts with outgoing money, aka last account balance
         """
@@ -150,3 +150,6 @@ class Bank(object):
             return True
         else:
             raise KeyError, f'Transaction {transaction_id} does not exist'
+        
+    def merge_accounts(self, account_1, account_2):
+        return self.account_store.merge_accounts(account_1, account_2)
