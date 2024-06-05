@@ -9,11 +9,11 @@ class TicTacToe:
         self.winner = None
 
     def print_board(self):
-        print(" {} | {} | {} ".format(self.board[0], self.board[1], self.board[2]))
+        print(f" {self.board[0]} | {self.board[1]} | {self.board[2]}")
         print("---+---+---")
-        print(" {} | {} | {} ".format(self.board[3], self.board[4], self.board[5]))
+        print(f" {self.board[3]} | {self.board[4]} | {self.board[5]}")
         print("---+---+---")
-        print(" {} | {} | {} ".format(self.board[6], self.board[7], self.board[8]))
+        print(f" {self.board[6]} | {self.board[7]} | {self.board[8]}")
         print()
 
     def check_win(self, icon):
@@ -39,6 +39,7 @@ class TicTacToe:
             return False
 
     def basic_computer_move(self):
+        icon = self.player2_icon
         # Check if the computer can win in the next move
         for i in range(0, 9):
                 if self.board[i] == ' ':
@@ -77,7 +78,7 @@ class TicTacToe:
                 self.player_move(icon)
         else:
             print("Computer's turn")
-            basic_computer_move()
+            self.basic_computer_move()
             
 
     def play_game(self):
