@@ -64,12 +64,12 @@ class TicTacToe:
 
     def player_move(self, icon):
         if icon == self.player1_icon:
-            number = 1
-        elif icon == self.player2_icon:
-            number = 2
-        if number == 1:
-            print("Your turn player {}".format(number))
+            print(f"Your turn player {self.player1_icon}")
             choice = int(input("Enter your move (1-9): ").strip())
+            if choice < 1 or choice > 9:
+                print("Please enter a value between 1 and 9.")
+                self.player_move(icon)
+                return
             if self.board[choice - 1] == ' ':
                 self.board[choice - 1] = icon
             else:
